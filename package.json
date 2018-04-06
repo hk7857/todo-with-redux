@@ -1,5 +1,5 @@
 {
-  "name": "react_starter",
+  "name": "todo-with-redux",
   "version": "1.0.0",
   "description": "Starting setup for react redux project",
   "main": "index.js",
