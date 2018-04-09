@@ -1,15 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getSingleItem } from '../actions';
 
 class ItemView extends Component {
+    componentDidMount(){
+        const { id } = this.props.match.params;
+        this.props.getSingleItem(id);
+    }
+
     render(){
-        return(
+        console.log('ItemView props:', this.props.match.params.id);
+        
+        const {item} = this.props;
+
+        return(            
             <div>
-                <h3>
-                    View Single Item
-                </h3>
+                <Link className="btn" to="/">View Full List</Link>
+                <h3> {item.title}</h3>
+                <p>{item.details}</p>
             </div>
         )
     }
 }
 
-export default ItemView;
+function mapStateToProps(state){
+    return{
+        item: state.list.singleItem
+    }
+}
+export default connect(mapStateToProps, { getSingleItem: getSingleItem }) (ItemView);
