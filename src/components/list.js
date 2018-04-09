@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getList } from '../actions';
 
 class List extends Component {
@@ -10,13 +11,28 @@ class List extends Component {
         // console.log('PROPS:', this.props)
 
         const itemElements = this.props.list.map((item, index) => {
-            return <li key={index} className="collection-item">{item.title}</li>
+            console.log('Item:', item);
+            return (
+            <li key={index} className="collection-item">
+                <Link to={`/item/${item._id}`}>{item.title}</Link>
+            </li>
+            )
         });
 
+        const style = {
+            height: '60px'
+        }
+
         return (
-            <ul className="collection">
-                {itemElements}
-            </ul>
+            <div>
+                <div style={style}>
+                    <Link className="btn right" to="/add-item">Add Item</Link>
+                </div>
+               
+                <ul className="collection">
+                    {itemElements}
+                </ul>
+            </div>
         )
     }
 }
